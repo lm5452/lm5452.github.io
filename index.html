@@ -215,7 +215,9 @@
 					<img id="skillWap" src="./static/svg/skillWap.svg" alt="" srcset="">
 				</div>
 <!-- ===== 友链板块 - 开始 ===== -->
-<!-- 适配移动端和pc端，头像和名称点击跳转对应网站，一行最多6个 -->
+<!-- 
+数据从 /static/links.json 读取，后续只需要修改这个文件就能添加/删除友链
+-->
 <div class="title" style="margin-top: 2.5rem;">
     <svg t="1705257422086" class="icon" viewBox="0 0 1024 1024" version="1.1"
         xmlns="http://www.w3.org/2000/svg" p-id="1891" width="26px" height="26px">
@@ -226,51 +228,19 @@
     Friends
 </div>
 
-<div class="friends-grid">
-    <!-- 友链项 1 -->
-    <a class="friend-item" href="https://xiaoyu.njxc.xyz/" target="_blank" rel="noopener">
-        <div class="friend-avatar">
-            <img src="https://cdn.magicalapk.com/square/1370419231533489.jpg" alt="" onerror="this.src='data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2264%22%20height%3D%2264%22%20viewBox%3D%220%200%2064%2064%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20fill%3D%22%23a1ccd1%22%2F%3E%3Ctext%20x%3D%2232%22%20y%3D%2240%22%20font-size%3D%2224%22%20text-anchor%3D%22middle%22%20fill%3D%22%23ffffff%22%3E友%3C%2Ftext%3E%3C%2Fsvg%3E'">
-        </div>
-        <div class="friend-name">XIAOYU个人空间</div>
-    </a>
-    
-    <!-- 友链项 2 -->
-    <a class="friend-item" href="https://blog.mxw2024.top/" target="_blank" rel="noopener">
-        <div class="friend-avatar">
-            <img src="https://blog.mxw2024.top/assets/images/favicon.ico" alt="" onerror="this.src='data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2264%22%20height%3D%2264%22%20viewBox%3D%220%200%2064%2064%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20fill%3D%22%237bb0b6%22%2F%3E%3Ctext%20x%3D%2232%22%20y%3D%2240%22%20font-size%3D%2224%22%20text-anchor%3D%22middle%22%20fill%3D%22%23ffffff%22%3EGit%3C%2Ftext%3E%3C%2Fsvg%3E'">
-        </div>
-        <div class="friend-name">孟轩科技's blog</div>
-    </a>
-    
-    <!-- 友链项 3 -->
-    <a class="friend-item" href="https://www.mxw2024.top" target="_blank" rel="noopener">
-        <div class="friend-avatar">
-            <img src="https://www.mxw2024.top/favicon.ico" alt="" onerror="this.src='data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2264%22%20height%3D%2264%22%20viewBox%3D%220%200%2064%2064%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20fill%3D%22%23a1ccd1%22%2F%3E%3Ctext%20x%3D%2232%22%20y%3D%2240%22%20font-size%3D%2220%22%20text-anchor%3D%22middle%22%20fill%3D%22%23ffffff%22%3ESO%3C%2Ftext%3E%3C%2Fsvg%3E'">
-        </div>
-        <div class="friend-name">孟轩网的小站</div>
-    </a>
-        <!-- 友链项 4 -->
-    <a class="friend-item" href="https://blog.dongyue12.cn" target="_blank" rel="noopener">
-        <div class="friend-avatar">
-            <img src="https://z.wiki/u/QWk2h2XyU
-" alt="" onerror="this.src='data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2264%22%20height%3D%2264%22%20viewBox%3D%220%200%2064%2064%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20fill%3D%22%23a1ccd1%22%2F%3E%3Ctext%20x%3D%2232%22%20y%3D%2240%22%20font-size%3D%2220%22%20text-anchor%3D%22middle%22%20fill%3D%22%23ffffff%22%3ESO%3C%2Ftext%3E%3C%2Fsvg%3E'">
-        </div>
-        <div class="friend-name">冬月</div>
-    </a>
-    
-</div>
+<!-- 友链容器：JS会把友链数据渲染到这里 -->
+<div class="friends-grid" id="friendsContainer"></div>
 
-<!-- 适配样式 - 支持一行最多6个，完美适配移动端 -->
 <style>
-    /* 友链网格 - PC端一行6个 */
+    /* PC端：一行最多显示6个友链 */
     .friends-grid {
         display: grid;
         grid-template-columns: repeat(6, 1fr);
         gap: 1rem;
         margin: 1.5rem 0 0.5rem;
     }
-    
+
+    /* 单个友链卡片样式：毛玻璃+圆角+hover动画 */
     .friend-item {
         display: flex;
         flex-direction: column;
@@ -284,13 +254,15 @@
         border: 1px solid rgba(255, 255, 255, 0.6);
         transition: all 0.25s ease;
     }
-    
+
+    /* 鼠标悬浮效果：上移+阴影+背景变化 */
     .friend-item:hover {
         background: rgba(220, 240, 245, 0.7);
         transform: translateY(-4px);
         box-shadow: 0 8px 18px -6px rgba(80, 130, 140, 0.25);
     }
-    
+
+    /* 头像容器：圆形边框+居中裁剪 */
     .friend-avatar {
         width: 56px;
         height: 56px;
@@ -303,14 +275,16 @@
         align-items: center;
         justify-content: center;
     }
-    
+
+    /* 头像图片：防止拉伸变形 */
     .friend-avatar img {
         width: 100%;
         height: 100%;
         object-fit: cover;
         display: block;
     }
-    
+
+    /* 友链名称：居中+自适应换行 */
     .friend-name {
         font-size: 0.9rem;
         color: #1f4b52;
@@ -320,45 +294,45 @@
         word-break: break-word;
         max-width: 100%;
     }
-    
-    /* 平板适配 - 一行4个 */
+
+    /* 平板适配：一行4个 */
     @media screen and (max-width: 900px) {
         .friends-grid {
             grid-template-columns: repeat(4, 1fr);
             gap: 1rem;
         }
     }
-    
-    /* 手机横屏/小平板 - 一行3个 */
+
+    /* 手机横屏/小平板适配：一行3个 */
     @media screen and (max-width: 600px) {
         .friends-grid {
             grid-template-columns: repeat(3, 1fr);
             gap: 0.9rem;
         }
-        
+
         .friend-avatar {
             width: 52px;
             height: 52px;
         }
-        
+
         .friend-name {
             font-size: 0.8rem;
         }
     }
-    
-    /* 小手机 - 一行2个 */
+
+    /* 小手机适配：一行2个 */
     @media screen and (max-width: 400px) {
         .friends-grid {
             grid-template-columns: repeat(2, 1fr);
         }
-        
+
         .friend-avatar {
             width: 48px;
             height: 48px;
         }
     }
-    
-    /* 暗色模式兼容 */
+
+    /* 暗色模式适配：自动切换深色背景和文字颜色 */
     @media (prefers-color-scheme: dark) {
         .friend-item {
             background: rgba(30, 45, 50, 0.5);
@@ -372,6 +346,53 @@
         }
     }
 </style>
+
+<!-- 友链数据读取与渲染JS -->
+<script>
+// 页面加载完成后，读取JSON文件并渲染友链
+document.addEventListener('DOMContentLoaded', function() {
+    // 读取static目录下的友链数据文件
+    fetch('/static/links.json')
+        .then(function(response) {
+            // 检查文件是否加载成功（404/权限问题会直接报错）
+            if (!response.ok) {
+                throw new Error('友链文件加载失败：' + response.status);
+            }
+            // 解析JSON数据
+            return response.json();
+        })
+        .then(function(friends) {
+            // 获取友链容器元素
+            const container = document.getElementById('friendsContainer');
+            let html = '';
+
+            // 遍历JSON中的每个友链数据，生成对应的HTML卡片
+            friends.forEach(function(friend) {
+                html += `
+                    <a class="friend-item" href="${friend.url}" target="_blank" rel="noopener noreferrer">
+                        <div class="friend-avatar">
+                            <img 
+                                src="${friend.avatar}" 
+                                alt="${friend.name}"
+                                onerror="this.src='data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23a1ccd1'/%3E%3Ctext x='32' y='40' font-size='24' text-anchor='middle' fill='white'%3E%E5%8F%8B%3C/text%3E%3C/svg%3E'"
+                            >
+                        </div>
+                        <div class="friend-name">${friend.name}</div>
+                    </a>
+                `;
+            });
+
+            // 将生成的所有友链卡片插入到页面中
+            container.innerHTML = html;
+        })
+        .catch(function(error) {
+            // 加载失败时，在页面显示错误提示（同时在控制台打印日志方便排查）
+            console.error('友链渲染出错：', error);
+            document.getElementById('friendsContainer').innerHTML = 
+                '<p style="text-align:center; color:#999; padding:2rem 0;">友链加载失败，请检查 /static/links.json 文件路径和格式</p>';
+        });
+});
+</script>
 <!-- ===== 友链板块 - 结束 ===== -->
 <!-- Giscus 评论系统 -->
 <div style="max-width: 800px; margin: 30px auto 0; padding: 0 15px;">
@@ -404,7 +425,7 @@
 <script>
 (function() {
     // 修改这里的起始时间（年,月,日,时,分,秒）- 月份从0开始，3表示4月
-    const start = new Date(2024, 3, 1, 0, 0, 0);
+    const start = new Date(2025, 3, 1, 0, 0, 0);
     
     function update() {
         const now = new Date();
@@ -422,7 +443,7 @@
         const minutes = Math.floor(diff / 60);
         const seconds = diff % 60;
         
-        document.getElementById('runtime').innerText = `网站已运行 ${days}天 ${hours}小时 ${minutes}分 ${seconds}秒`;
+        document.getElementById('runtime').innerText = `🌐网站已运行 ${days}天 ${hours}小时 ${minutes}分 ${seconds}秒`;
     }
     
     update();
