@@ -216,7 +216,7 @@
 				</div>
 <!-- ===== 友链板块 - 开始 ===== -->
 <!-- 
-数据从 /static/links.json 读取，后续只需要修改这个文件就能添加/删除友链
+数据从 /static/js/links.json 读取，后续只需要修改这个文件就能添加/删除友链
 -->
 <div class="title" style="margin-top: 2.5rem;">
     <svg t="1705257422086" class="icon" viewBox="0 0 1024 1024" version="1.1"
@@ -352,7 +352,7 @@
 // 页面加载完成后，读取JSON文件并渲染友链
 document.addEventListener('DOMContentLoaded', function() {
     // 读取static目录下的友链数据文件
-    fetch('/static/links.json')
+    fetch('/static/js/links.json')
         .then(function(response) {
             // 检查文件是否加载成功（404/权限问题会直接报错）
             if (!response.ok) {
