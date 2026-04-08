@@ -100,10 +100,9 @@
 					Hello I' m <span class="gradientText">
 						椰汁</span>
 				</div>
-				<div class="description">👦 <span class="purpleText">一个初中生</span>
+				<div class="description">👦 <span class="description">一个初中生</span>
 				</div>
-				<div class="description">📝 The only way to do <span class="purpleText textBackground">great</span> is
-					to <span class="purpleText textBackground">love</span> what you do. </div>
+				<div class="description">关关难过关关过,前路漫漫亦灿灿</div>
 
 				<div class="iconContainer">
 					<a class="iconItem" onclick="" href="https://github.com/c1201y">
@@ -401,6 +400,35 @@
 	<footer>
 		cyan © 2024-2026 |
 		<a href="https://icp.gov.moe/?keyword=20260988" target="_blank">萌ICP备20260988号</a>
+		<span id="runtime"></span>
+<script>
+(function() {
+    // 修改这里的起始时间（年,月,日,时,分,秒）- 月份从0开始，3表示4月
+    const start = new Date(2024, 3, 1, 0, 0, 0);
+    
+    function update() {
+        const now = new Date();
+        let diff = Math.floor((now - start) / 1000);
+        
+        if (diff < 0) {
+            document.getElementById('runtime').innerText = '尚未开始';
+            return;
+        }
+        
+        const days = Math.floor(diff / 86400);
+        diff = diff % 86400;
+        const hours = Math.floor(diff / 3600);
+        diff = diff % 3600;
+        const minutes = Math.floor(diff / 60);
+        const seconds = diff % 60;
+        
+        document.getElementById('runtime').innerText = `网站已运行 ${days}天 ${hours}小时 ${minutes}分 ${seconds}秒`;
+    }
+    
+    update();
+    setInterval(update, 1000);
+})();
+</script>
 	</footer>
 	<div class="tc">
 		<div onclick="" class="tc-main">
