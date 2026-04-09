@@ -352,7 +352,7 @@
 // 页面加载完成后，读取JSON文件并渲染友链
 document.addEventListener('DOMContentLoaded', function() {
     // 读取static目录下的友链数据文件
-    fetch('/static/js/links.json')
+    fetch('./static/js/links.json')
         .then(function(response) {
             // 检查文件是否加载成功（404/权限问题会直接报错）
             if (!response.ok) {
@@ -389,7 +389,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // 加载失败时，在页面显示错误提示（同时在控制台打印日志方便排查）
             console.error('友链渲染出错：', error);
             document.getElementById('friendsContainer').innerHTML = 
-                '<p style="text-align:center; color:#999; padding:2rem 0;">友链加载失败，请检查 /static/links.json 文件路径和格式</p>';
+                '<p style="text-align:center; color:#999; padding:2rem 0;">友链加载失败，请检查文件路径和格式</p>';
         });
 });
 </script>
