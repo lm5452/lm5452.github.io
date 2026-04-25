@@ -97,54 +97,64 @@ body {
 
 }
 
+/* 替换原有的 #zyyo-loading 样式 */
 #zyyo-loading {
-    background: radial-gradient(white, #d8eaff);
-    background-size: 100%;
-    background-position: center;
-
-    height: 100%;
-    width: 100%;
     position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(white, #d8eaff); /* 保留你原本的背景 */
     z-index: 999999;
-    margin-top: 0px;
-    top: 0px;
-    pointer-events: none;
-    opacity: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display: flex;          /* 开启 Flex 布局 */
+    justify-content: center;/* 水平居中 */
+    align-items: center;    /* 垂直居中 */
+    transition: opacity 0.5s ease; /* 添加淡出动画 */
 }
 
+/* 新增：内容容器 */
+.loading-content {
+    text-align: center;
+}
 
-
-#zyyo-loading-center {
-    height: 150px;
-    width: 150px;
-    position: relative;
+/* 新增：头像样式 */
+.loading-avatar {
+    width: 80px;
+    height: 80px;
     border-radius: 50%;
-    background: #472eff;
-
-    animation: zoom 1s linear infinite;
+    object-fit: cover;
+    border: 3px solid white;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+    display: block;
 }
 
-@keyframes zoom {
-    0% {
-        transform: scale(0);
-        opacity: 1;
-    }
-
-    50% {
-        opacity: 0.5;
-    }
-
-    100% {
-        transform: scale(1);
-        opacity: 0;
-    }
+/* 新增：进度条外框 */
+.loading-progress-bar {
+    width: 200px;
+    height: 10px;
+    background-color: #e0e0e0; /* 灰色底 */
+    border-radius: 5px;
+    overflow: hidden;
+    margin: 0 auto; /* 居中 */
 }
 
+/* 新增：进度条内条 (绿色部分) */
+.loading-progress-fill {
+    height: 100%;
+    width: 0%; /* 初始宽度为0 */
+    background-color: #4CAF50; /* 绿色 */
+    border-radius: 5px;
+    transition: width 0.2s ease-out; /* 平滑过渡 */
+}
 
-
+/* 新增：文字样式 */
+.loading-text {
+    margin-top: 10px;
+    color: #666;
+    font-size: 14px;
+    font-family: sans-serif;
+}
 
 .zyyo-filter {
     position: fixed;
