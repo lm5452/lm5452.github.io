@@ -119,14 +119,18 @@ body {
 
 /* 新增：头像样式 */
 .loading-avatar {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 3px solid white;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    margin-bottom: 20px;
-    display: block;
+    width: 60px;           /* 改小了：原来是 80px 或更大 */
+    height: 60px;          /* 保持高度和宽度一致，保证是正圆 */
+    border-radius: 50%;    /* 确保是圆的 */
+    
+    object-fit: cover;     /* 防止图片变形 */
+    border: 2px solid rgba(255, 255, 255, 0.5); /* 半透明白边，更精致 */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);  /* 加点阴影增加立体感 */
+    
+    margin-bottom: 15px;   /* 关键！把进度条往下挤一点，防止遮挡 */
+    display: block;        /* 确保它是块级元素 */
+    margin-left: auto;     /* 配合 display:block 实现水平居中 */
+    margin-right: auto;
 }
 
 /* 新增：进度条外框 */
