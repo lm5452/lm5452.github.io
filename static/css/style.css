@@ -119,8 +119,8 @@ body {
 
 /* 新增：头像样式 */
 .loading-avatar {
-    width: 60px;           /* 改小了：原来是 80px 或更大 */
-    height: 60px;          /* 保持高度和宽度一致，保证是正圆 */
+    width: 90px;           /* 改小了：原来是 80px 或更大 */
+    height: 90px;          /* 保持高度和宽度一致，保证是正圆 */
     border-radius: 50%;    /* 确保是圆的 */
     
     object-fit: cover;     /* 防止图片变形 */
