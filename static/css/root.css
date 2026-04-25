@@ -142,7 +142,7 @@ html {
     --item_left_title_color: #000000;
     --item_left_text_color: #494949;
     --footer_text_color: #ffffff;
-    --left_tag_item: #c7e1fa;
+    --left_tag_item: transparent;
     --card_filter: 20px;
     --back_filter: 0px;
     --back_filter_color: #00000030;
