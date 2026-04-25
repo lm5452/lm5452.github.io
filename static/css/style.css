@@ -98,50 +98,56 @@ body {
 }
 
 #zyyo-loading {
-    background: radial-gradient(white, #d8eaff);
-    background-size: 100%;
-    background-position: center;
-
+    background: #fff;
     height: 100%;
     width: 100%;
     position: fixed;
     z-index: 999999;
-    margin-top: 0px;
-    top: 0px;
+    top: 0;
     pointer-events: none;
     opacity: 1;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
-
-
-
 #zyyo-loading-center {
-    height: 150px;
-    width: 150px;
+    width: 240px;
+    height: 6px;
+    background: #f1f1f1;
+    border-radius: 99px;
     position: relative;
+    overflow: hidden;
+}
+/* 头像 */
+#zyyo-loading-center::before {
+    content: "";
+    display: block;
+    width: 120px;
+    height: 120px;
     border-radius: 50%;
+    background-image: url(https://free.picui.cn/free/2026/03/23/69c12fe83f7a4.jpg);
+    background-size: cover;
+    background-position: center;
+    margin-bottom: 30px;
+}
+/* 进度条 */
+#zyyo-loading-center::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 0%;
     background: #472eff;
-
-    animation: zoom 1s linear infinite;
+    border-radius: 99px;
+    animation: progress 1.5s linear forwards;
+}
+@keyframes progress {
+    0% { width: 0%; }
+    100% { width: 100%; }
 }
 
-@keyframes zoom {
-    0% {
-        transform: scale(0);
-        opacity: 1;
-    }
-
-    50% {
-        opacity: 0.5;
-    }
-
-    100% {
-        transform: scale(1);
-        opacity: 0;
-    }
-}
 
 
 
