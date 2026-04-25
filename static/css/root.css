@@ -139,7 +139,7 @@ html {
     --text_bg_color: rgb(121 163 231);
     --item_bg_color: rgba(249, 250, 251, 0.42);
     --item_hover_color: rgba(244, 245, 246, 0.8);
-    --item_left_title_color: #ffffff;
+    --item_left_title_color: #000000;
     --item_left_text_color: #494949;
     --footer_text_color: #ffffff;
     --left_tag_item: #c7e1fa;
