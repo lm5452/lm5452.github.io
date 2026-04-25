@@ -890,3 +890,31 @@ footer {
 .onoffswitch-checkbox:checked+.onoffswitch-label .onoffswitch-switch {
     right: 50%;
 }
+/* --- 补全缺失的进度条和文字样式 --- */
+/* 进度条外框 (灰色背景) */
+.loading-progress-bar {
+    width: 200px;
+    height: 6px;
+    background-color: #e0e0e0;
+    border-radius: 3px;
+    overflow: hidden;
+    margin: 0 auto 10px;
+}
+
+/* 进度条内条 (绿色部分) */
+.loading-progress-fill {
+    height: 100%;
+    width: 0%;
+    background-color: #4CAF50;
+    border-radius: 3px;
+    transition: width 0.2s ease-out;
+}
+
+/* 百分比文字 */
+.loading-text {
+    color: #666;
+    font-size: 14px;
+    font-family: sans-serif;
+    margin-top: 5px;
+}
+
