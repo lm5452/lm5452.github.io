@@ -461,6 +461,15 @@ document.addEventListener('DOMContentLoaded', function() {
 	</div>
 <div id="xf-MusicPlayer" data-cdnName="https://player.xfyun.club/js"  data-themeColor="xf-darkGreen" data-songChart="热歌榜"data-fadeOutAutoplay data-memory="1" data-random="true"></div>
 <script src="https://player.xfyun.club/js/xf-MusicPlayer/js/xf-MusicPlayer.min.js"></script>
+<script>
+   const bar = document.getElementById('zyyo-loading-bar');
+   const loading = document.getElementById('zyyo-loading');
+   bar.style.width = '10%';
+   window.addEventListener('load', () => {
+     bar.style.width = '100%';
+     setTimeout(()=>{ loading.style.opacity = 0; }, 400);
+   });
+</script>
 </body>
 <script src="./static/js/script.js"> </script>
 
