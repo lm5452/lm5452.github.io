@@ -218,9 +218,55 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 var pageLoading = document.querySelector("#zyyo-loading");
-window.addEventListener('load', function() {
-    setTimeout(function () {
-        pageLoading.style.opacity = '0';
-    }, 100);
+// --- 智能加载进度条逻辑开始 ---
+window.addEventListener('load', function() { 
+    const pageLoading = document.getElementById('zyyo-loading');
+    const progressBar = pageLoading ? pageLoading.querySelector('.loading-progress-fill') : null;
+    const progressText = pageLoading ? pageLoading.querySelector('.loading-text') : null;
+
+    // 如果找不到元素，直接隐藏
+    if (!pageLoading) return;
+
+    // 1. 获取资源总数
+    const resources = performance.getEntriesByType('resource');
+    let loadedCount = 0;
+    const totalResources = resources.length;
+
+    // 2. 更新进度函数
+    function updateProgress(percent) {
+        const p = Math.min(100, Math.max(0, percent));
+        if (progressBar) progressBar.style.width = p + '%';
+        if (progressText) progressText.innerText = Math.round(p) + '%';
+
+        if (p === 100) {
+            // 完成后延迟隐藏
+            setTimeout(() => {
+                pageLoading.style.opacity = '0';
+            }, 500); // 500ms后淡出
+        }
+    }
+
+    // 3. 监听资源加载
+    if (totalResources === 0) {
+        updateProgress(100); // 没资源直接满
+    } else {
+        resources.forEach(resource => {
+            const img = new Image();
+            img.onload = img.onerror = () => {
+                loadedCount++;
+                // 基础进度20% + 资源加载进度80%
+                const resourceProgress = (loadedCount / totalResources) * 80;
+                updateProgress(20 + resourceProgress);
+            };
+            img.src = resource.name;
+        });
+    }
+
+    // 4. 兜底机制 (防止卡死，5秒强制完成)
+    setTimeout(() => {
+        updateProgress(100);
+    }, 5000);
 });
+// --- 智能加载进度条逻辑结束 ---
+
 
