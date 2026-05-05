@@ -1,20 +1,97 @@
-## 由zyyo 主页的二开版本
-- 演示：[主页](https://home.132614.xyz/)
+##  homepage
 
-- 欢迎下载
+> 基于 **@zyyo** 大佬的二开版本进行优化与扩展。
+> 
+> 这是一个简洁、响应式的静态个人主页模板，集成了音乐播放、评论系统与动态友链功能。
 
 ---
 
-### 更新内容
+###  核心特性
 
-- 添加友链功能
-```html
-   <!-- 友链项 -->
-    <a class="friend-item" href="网站链接" target="_blank" rel="noopener">
-        <div class="friend-avatar">
-            <img src="网站头像" alt="" onerror="this.src='data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2264%22%20height%3D%2264%22%20viewBox%3D%220%200%2064%2064%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20fill%3D%22%23a1ccd1%22%2F%3E%3Ctext%20x%3D%2232%22%20y%3D%2240%22%20font-size%3D%2220%22%20text-anchor%3D%22middle%22%20fill%3D%22%23ffffff%22%3ESO%3C%2Ftext%3E%3C%2Fsvg%3E'">
-        </div>
-        <div class="friend-name">网站名称</div>
-    </a>```
+在此版本中，我主要进行了以下改进：
 
+- 智能友链系统：新增友链功能，支持自动适配不同设备屏幕；只需在 JSON 文件中配置即可添加。
+- 沉浸式音乐：内置音乐播放器，为你的访客提供更好的浏览体验。
+- Giscus 评论：集成 [Giscus](https://giscus.app/zh-CN) 评论系统，轻量且无后端负担。
+- 运行状态监控：添加了网站运行时间统计与备案信息显示。
 
+---
+
+###  快速部署指南
+
+#### 1. Fork 与重命名
+
+1. 点击右上角的 **Fork** 按钮克隆本仓库。
+
+2. 将仓库名称修改为：**`你的用户名.github.io`** (例如: `c1201y.github.io`)。
+
+#### 2. 开启 GitHub Pages
+
+1. 进入仓库的 **Settings** (设置) 页面。
+
+2. 在左侧菜单找到并点击 **Pages**。
+
+3. **Build and deployment**:
+* Source: 选择 `Deploy from a branch`。
+* Branch: 选择 `main` (或 master)，文件夹选择 `/(root)`。
+4. 点击 **Save** 保存。
+
+> **提示**：保存后等待约 1-2 分钟，刷新页面即可看到你的网站上线地址（通常为 `https://你的用户名.github.io`）。
+
+#### 3. 配置评论系统 (可选)
+
+首次设置 (只需一次)
+
+1.  开启 Discussions 功能
+    *   进入你个人主页的仓库，点击 Settings。
+    *   在右侧找到 Features 区域，勾选 Discussions。
+
+2.  安装 Giscus App
+    *   访问 Giscus GitHub App 页面。
+    *   点击 Install，并授权它访问你刚才创建的那个评论仓库。
+
+3.  获取配置代码
+    *   访问 [Giscus 中文站](https://giscus.app/zh-CN)。
+    *   按照网页指引进行配置：
+        
+        *   仓库: 输入你的 用户名/仓库名 (例如: c1201y/my-blog-comments)。
+        
+        *   Announcements: 推荐选择此分类，这样只有仓库维护者可以创建新讨论，避免混乱。
+      
+        *   主题: 选择一个你喜欢的外观主题。
+   
+        *   配置完成后，页面下方会生成一段  代码。
+
+4.  应用到你的主页
+
+* 复制上一步生成的完整  代码。
+   
+* 在你的个人主页仓库中，找到 index.html 文件。
+   
+
+* 提交更改，几分钟后刷新你的主页，评论区就会出现了。
+
+---
+
+### ️ 个性化修改
+
+想要修改成自己的内容？请参考以下文件路径：
+
+| 修改内容 | 文件路径 | 说明 |
+| :--- | :--- | :--- |
+| **基本信息/文字** | `index.html` | 修改标题、备案号、Giscus 配置等 |
+| **友情链接** | `static/js/links.json` | 在此文件中添加或删除友链数据 |
+| **主题样式** | `static/css/` | 修改 CSS 文件以更换主题 |
+| **图片资源** | `static/img/` | 替换头像、背景图等素材 |
+
+---
+
+###  许可证
+
+本项目基于 @zyyo 的版本二开，请遵循原项目的开源协议。
+
+---
+
+<div align="center">
+  <sub>Built with ️ by c1201y</sub>
+</div>
